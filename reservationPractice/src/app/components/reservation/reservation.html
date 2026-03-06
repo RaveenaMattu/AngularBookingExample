@@ -1,25 +1,26 @@
-<h2>RESERVATION AREAS</h2>
-<span>{{reservationCount()}}</span>
+<div id="content">
+  <h2>RESERVATION AREAS</h2>
+  <span>{{reservationCount()}}</span>
 
+  <div class="d-grid gap-3" style="grid-template-columns: repeat(3, 1fr); justify-items:center;">
+    @for(reservation of reservations; track reservation; let i = $index) {
+      
+      <div class="card shadow-sm border-0" style="width: 28rem;">
+        <div class="card-body">
+          <h4 class="card-title">Reservation {{i+1}}</h4>
+          
+          <p class="card-description">
+            {{reservation.rName}} <br/> {{reservation.rTime}}
+          </p>
 
-<div class="d-grid gap-3" style="grid-template-columns: repeat(3, 1fr); padding: 0 120px;">
-  @for(reservation of reservations; track reservation; let i = $index) {
-    
-    <div class="card" style="width: 25rem;">
-      <div class="card-body">
-        <h4 class="card-title">Reservation {{i+1}}</h4>
+          @if (reservation.isBooked) {
+            <button class="btn btn-success" (click)="toggleReservation(i)">Available</button>
+          } @else {
+            <button class="btn btn-danger" (click)="toggleReservation(i)">Not Available</button>
+          }
 
-        <p class="card-description">
-          {{reservation.rName}} {{reservation.rTime}}
-        </p>
-
-        @if (reservation.isBooked) {
-          <button class="btn btn-success" (click)="toggleReservation(i)">Available</button>
-        } @else {
-          <button class="btn btn-danger" (click)="toggleReservation(i)">Not Available</button>
-        }
-
+        </div>
       </div>
-    </div>
-  }
+    }
+  </div>
 </div>

@@ -2,9 +2,16 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 
 body {
-  padding: 50px 80px;
+  padding: 170px 80px;
+  background: #fcfcfc;
+  
 }
 h2 {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 70px;
+}
+#content {
+  border: 2px solid #727272;
+  border-radius: 18px;
+  padding: 50px 20px;
 }

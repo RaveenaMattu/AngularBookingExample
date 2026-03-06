@@ -1,13 +1,25 @@
-<h2>Reservation Areas</h2>
+<h2>RESERVATION AREAS</h2>
+<span>{{reservationCount()}}</span>
 
-@for(reservation of reservations; track reservation; let i = $index) {
-  <div>
-    {{reservation.rName}} <br>
-    {{reservation.rTime}}
-    @if (reservation.isBooked == true) {
-      <p>Available</p>
-    } @else {
-      <p>Not Available</p>
-    }
-  </div>
-}
+
+<div class="d-grid gap-3" style="grid-template-columns: repeat(3, 1fr); padding: 0 120px;">
+  @for(reservation of reservations; track reservation; let i = $index) {
+    
+    <div class="card" style="width: 25rem;">
+      <div class="card-body">
+        <h4 class="card-title">Reservation {{i+1}}</h4>
+
+        <p class="card-description">
+          {{reservation.rName}} {{reservation.rTime}}
+        </p>
+
+        @if (reservation.isBooked) {
+          <button class="btn btn-success" (click)="toggleReservation(i)">Available</button>
+        } @else {
+          <button class="btn btn-danger" (click)="toggleReservation(i)">Not Available</button>
+        }
+
+      </div>
+    </div>
+  }
+</div>

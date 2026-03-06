@@ -46,5 +46,9 @@ export class ReservationService {
   toggleBooking(i: number) {
     this.reservations[i].isBooked = !this.reservations[i].isBooked;
   }
+
+  totalBookings(): number {
+    return this.reservations.filter(res => res.isBooked).length;
+  }
   
  }

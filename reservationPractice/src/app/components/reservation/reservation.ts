@@ -16,6 +16,12 @@ export class Reservation {
     this.reservations = this.reservationService.getReservations();
   }
 
-  
+  toggleReservation(i:number) {
+    this.reservationService.toggleBooking(i);
+  }
+
+  reservationCount() {
+    this.reservationService.totalBookings();
+  }
 
 }

@@ -1,0 +1,13 @@
+<h2>Reservation Areas</h2>
+
+@for(reservation of reservations; track reservation; let i = $index) {
+  <div>
+    {{reservation.rName}} <br>
+    {{reservation.rTime}}
+    @if (reservation.isBooked == true) {
+      <p>Available</p>
+    } @else {
+      <p>Not Available</p>
+    }
+  </div>
+}

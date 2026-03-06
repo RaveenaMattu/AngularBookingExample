@@ -1,4 +1,4 @@
-export interface reservationInterface {
+export interface ReservationInterface {
   rName: string;
   rTime: string;
   isBooked: boolean;

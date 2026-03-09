@@ -1,8 +1,36 @@
 <div id="content">
   <h2>RESERVATION AREAS</h2>
-  <span>{{reservationCount()}}</span>
+  <!-- <span>{{reservationCount()}}</span> -->
+   <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Res. Id</th>
+      <th scope="col">Res. Name</th>
+      <th scope="col">Res. Time</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(reservation of reservations; track reservation; let i = $index) {
+      <tr class="tRow">
+      <td>{{i+1}}</td>
+      <td>{{reservation.rName}}</td>
+      <td>{{reservation.rTime}}</td>
+      <td>
+        <label>
+          <input
+            type="checkbox"
+            [checked]="reservation.isBooked"
+            (change)="toggleReservation(i)"
+          />
+          {{ reservation.isBooked ? 'Booked' : 'Available' }}
+        </label>
+      </td>
+    }
+  </tbody>
+</table>
 
-  <div class="d-grid gap-3" style="grid-template-columns: repeat(3, 1fr); justify-items:center;">
+  <!-- <div class="d-grid gap-3" style="grid-template-columns: repeat(3, 1fr); justify-items:center;">
     @for(reservation of reservations; track reservation; let i = $index) {
       
       <div class="card shadow-sm border-0" style="width: 28rem;">
@@ -23,14 +51,32 @@
             {{ reservation.isBooked ? 'Booked' : 'Available' }}
           </label>
 
-          <!-- @if (reservation.isBooked) {
+           @if (reservation.isBooked) {
             <button class="btn btn-success" (click)="toggleReservation(i)">Available</button>
           } @else {
             <button class="btn btn-danger" (click)="toggleReservation(i)">Not Available</button>
-          } -->
+          } 
 
         </div>
       </div>
     }
-  </div>
+  </div> -->
+  <button class="btn btn-dark" id="addBtn" (click)="openModal(lightbox)">Add Reservation</button>
 </div>
+
+<ng-template let-modal #lightbox>
+
+  <div class="modal-header">
+    <div class="modal-title">
+      <h3>Add Reservation</h3>
+    </div>
+    <button class="btn-close" (click)="modal.dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    abc def
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-dark" (click)="modal.close();">Add Reservation</button>
+  </div>
+
+</ng-template>

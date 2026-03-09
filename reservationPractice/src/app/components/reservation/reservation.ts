@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ReservationService } from '../../services/reservation-service';
 import { ReservationInterface } from '../../interface/ReservationInterface';
 
+
 @Component({
   selector: 'app-reservation',
   imports: [],
@@ -25,3 +26,8 @@ export class Reservation {
   }
 
 }
+/*
+
+STEP 1: Install Angular Bootstrap using:  npm install @ng-bootstrap/ng-bootstrap
+
+*/

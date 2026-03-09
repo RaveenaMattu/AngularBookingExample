@@ -13,11 +13,21 @@
             {{reservation.rName}} <br/> {{reservation.rTime}}
           </p>
 
-          @if (reservation.isBooked) {
+          <label>
+            <input
+              type="checkbox"
+              [checked]="reservation.isBooked"
+              (change)="toggleReservation(i)"
+            />
+
+            {{ reservation.isBooked ? 'Booked' : 'Available' }}
+          </label>
+
+          <!-- @if (reservation.isBooked) {
             <button class="btn btn-success" (click)="toggleReservation(i)">Available</button>
           } @else {
             <button class="btn btn-danger" (click)="toggleReservation(i)">Not Available</button>
-          }
+          } -->
 
         </div>
       </div>

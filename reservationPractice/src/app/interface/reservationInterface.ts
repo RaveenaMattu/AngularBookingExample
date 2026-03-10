@@ -1,4 +1,5 @@
 export interface ReservationInterface {
+  id: string,
   rName: string;
   rTime: slot;
   isBooked: boolean;

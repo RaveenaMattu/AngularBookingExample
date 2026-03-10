@@ -1,6 +1,37 @@
 <div id="content">
   <h2>RESERVATION AREAS</h2>
-  <!-- <span>{{reservationCount()}}</span> -->
+  
+<nav aria-label="Reservation filters" class="float-end mb-4">
+  <ul class="list-group list-group-horizontal">
+
+    <li class="list-group-item border-0">
+      <button
+        class="btn btn-link text-info p-0 text-decoration-none"
+        (click)="openModal(viewAvailRes)"
+        
+      >
+        View Available Reservations
+        <span class="badge bg-success rounded-pill ms-3">
+          {{ availableReservations() }}
+        </span>
+      </button>
+    </li>
+
+    <li class="list-group-item border-0">
+      <button
+        class="btn btn-link text-info p-0 text-decoration-none"
+        (click)="openModal(viewBookedRes)"
+      >
+        View Booked Reservations
+        <span class="badge bg-danger rounded-pill ms-3">
+          {{ bookedReservations() }}
+        </span>
+      </button>
+    </li>
+
+  </ul>
+</nav>
+  
   <table class="table">
     <thead>
       <tr>
@@ -13,7 +44,7 @@
     <tbody>
       @for (reservation of reservations; track $index; let i = $index) {
         <tr class="tRow">
-          <td>RES {{ i + 1 }}</td>
+          <td>RES {{ reservation.id }}</td>
           <td>{{ reservation.rName }}</td>
           <td>{{ reservation.rTime }}</td>
           <td>
@@ -30,42 +61,12 @@
       }
     </tbody>
   </table>
-
-  <!-- <div class="d-grid gap-3" style="grid-template-columns: repeat(3, 1fr); justify-items:center;">
-    @for(reservation of reservations; track reservation; let i = $index) {
-      
-      <div class="card shadow-sm border-0" style="width: 28rem;">
-        <div class="card-body">
-          <h4 class="card-title">Reservation {{i+1}}</h4>
-          
-          <p class="card-description">
-            {{reservation.rName}} <br/> {{reservation.rTime}}
-          </p>
-
-          <label>
-            <input
-              type="checkbox"
-              [checked]="reservation.isBooked"
-              (change)="toggleReservation(i)"
-            />
-
-            {{ reservation.isBooked ? 'Booked' : 'Available' }}
-          </label>
-
-           @if (reservation.isBooked) {
-            <button class="btn btn-success" (click)="toggleReservation(i)">Available</button>
-          } @else {
-            <button class="btn btn-danger" (click)="toggleReservation(i)">Not Available</button>
-          } 
-
-        </div>
-      </div>
-    }
-  </div> -->
   <button class="btn btn-dark" id="addBtn" (click)="openModal(addReservationModal)">
     Add Reservation
   </button>
 </div>
+
+<!-- ADD RESERVATION MODAL -->
 
 <ng-template #addReservationModal let-modal>
   <div class="modal-header justify-content-center">
@@ -76,23 +77,30 @@
   <div class="modal-body">
     <form #resForm="ngForm">
       <input
-  type="text"
-  class="form-control"
-  name="rName"
-  #nameInput="ngModel"
-  ngModel
-  placeholder="Enter Reservation Name"
-  required
-/>
+        type="text"
+        class="form-control"
+        name="rId"
+        #idInput="ngModel"
+        ngModel
+        placeholder="Enter Reservation Id"
+        required
+      />
 
-<div class="text-danger mt-1" *ngIf="nameInput.invalid && nameInput.touched">
-  Reservation name is required.
-</div>
-      <!-- <div class="text-danger mt-1" *ngIf="nameInput.invalid && nameInput.touched">
-  Reservation name is required.
-</div> -->
+      <input
+        type="text"
+        class="form-control mt-3"
+        name="rName"
+        #nameInput="ngModel"
+        ngModel
+        placeholder="Enter Reservation Name"
+        required
+      />
 
-      <select class="form-control mt-4" #slot>
+      <div class="text-danger mt-1" *ngIf="nameInput.invalid && nameInput.touched">
+        Reservation name is required.
+      </div>
+
+      <select class="form-control mt-3" #slot>
         <option value="" style="color: #bababa" disabled selected>Choose Time Slot</option>
         <option value="9am - 12noon">9am - 12noon</option>
         <option value="12noon - 3pm">12noon - 3pm</option>
@@ -110,9 +118,78 @@
 
     <button
       class="btn btn-dark"
-      (click)="addReservation(nameInput.value, slot.value, bookedInput.checked);"
+      (click)="addReservation(idInput.value, nameInput.value, slot.value, bookedInput.checked);"
     >
       Add Reservation
     </button>
   </div>
 </ng-template>
+
+<!-- VIEW BOOKED RESERVATIONS ONLY -->
+
+<ng-template #viewBookedRes let-modal>
+  <div class="modal-header justify-content-center w-100">
+    <h5 class="modal-title">BOOKED RESERVATIONS</h5>
+    <button class="btn-close" (click)="modal.dismiss()"></button>
+  </div>
+
+  <div class="modal-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Res. Id</th>
+            <th scope="col">Res. Name</th>
+            <th scope="col">Res. Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reservation of displayBookedRes(); track reservation; let i = $index) {
+            <tr>
+              <td>RES {{ reservation.id }}</td>
+              <td>{{reservation.rName}}</td>
+              <td>{{reservation.rTime}}</td>
+            </tr>
+          }
+        </tbody>                  
+    </table>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>
+
+<!-- VIEW AVAILABLE RESERVATIONS ONLY -->
+
+<ng-template #viewAvailRes let-modal>
+  <div class="modal-header justify-content-center w-100">
+    <h5 class="modal-title">BOOKED RESERVATIONS</h5>
+    <button class="btn-close" (click)="modal.dismiss()"></button>
+  </div>
+
+  <div class="modal-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Res. Id</th>
+            <th scope="col">Res. Name</th>
+            <th scope="col">Res. Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (reservation of displayAvailRes(); track reservation; let i = $index) {
+            <tr>
+              <td>RES {{ reservation.id }}</td>
+              <td>{{reservation.rName}}</td>
+              <td>{{reservation.rTime}}</td>
+            </tr>
+          }
+        </tbody>                  
+    </table>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-secondary" (click)="modal.close()">Close</button>
+  </div>
+</ng-template>
+

@@ -21,4 +21,8 @@ h2 {
   width: 10rem;
   align-self: center;
 }
+/*MODAL DIMENSIONS*/
+.custom-modal .modal-dialog {
+  max-width: 800px;
+}
 

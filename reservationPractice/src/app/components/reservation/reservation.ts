@@ -21,19 +21,42 @@ export class Reservation {
     this.reservations = this.reservationService.getReservations();
   }
 
+  openModal(content: any) {
+    this.modalService.open(content, {
+      centered: true,
+      windowClass: 'custom-modal'
+    });
+  }
+
+  //toggle availability
   toggleReservation(i: number) {
     this.reservationService.toggleBooking(i);
   }
 
-  addReservation(rName: string, rTime: string, isBooked: boolean) {
-    this.reservationService.addReservation(rName, rTime, isBooked);
+  //add new reservation
+  addReservation(id: string, rName: string, rTime: string, isBooked: boolean) {
+    this.reservationService.addReservation(id, rName, rTime, isBooked);
   }
 
-  openModal(content: any) {
-    this.modalService.open(content, {
-      centered: true,
-    });
+  //get booked reservations count
+  bookedReservations(): number {
+    return this.reservationService.bookCount();
   }
+
+  //get available reservations count
+  availableReservations(): number {
+    return this.reservationService.availCount();
+  }
+
+  //get booked reservations
+  displayBookedRes(): ReservationInterface[] {
+    return this.reservations = this.reservationService.getBookedReservations();
+  }
+  //get available reservations
+  displayAvailRes(): ReservationInterface[] {
+    return this.reservations = this.reservationService.getAvailReservations();
+  }
+
 }
 /*
 

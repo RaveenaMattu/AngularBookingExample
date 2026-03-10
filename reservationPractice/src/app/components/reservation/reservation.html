@@ -13,7 +13,7 @@
     <tbody>
       @for (reservation of reservations; track $index; let i = $index) {
         <tr class="tRow">
-          <td>RES 0{{ i + 1 }}</td>
+          <td>RES {{ i + 1 }}</td>
           <td>{{ reservation.rName }}</td>
           <td>{{ reservation.rTime }}</td>
           <td>
@@ -68,20 +68,29 @@
 </div>
 
 <ng-template #addReservationModal let-modal>
-  <div class="modal-header">
+  <div class="modal-header justify-content-center">
     <h5 class="modal-title">Add Reservation</h5>
     <button class="btn-close" (click)="modal.dismiss()"></button>
   </div>
 
   <div class="modal-body">
-    <form>
+    <form #resForm="ngForm">
       <input
-        type="text"
-        class="form-control"
-        #nameInput
-        placeholder="Enter Reservation Name"
-        required
-      />
+  type="text"
+  class="form-control"
+  name="rName"
+  #nameInput="ngModel"
+  ngModel
+  placeholder="Enter Reservation Name"
+  required
+/>
+
+<div class="text-danger mt-1" *ngIf="nameInput.invalid && nameInput.touched">
+  Reservation name is required.
+</div>
+      <!-- <div class="text-danger mt-1" *ngIf="nameInput.invalid && nameInput.touched">
+  Reservation name is required.
+</div> -->
 
       <select class="form-control mt-4" #slot>
         <option value="" style="color: #bababa" disabled selected>Choose Time Slot</option>
@@ -101,7 +110,7 @@
 
     <button
       class="btn btn-dark"
-      (click)="addReservation(nameInput.value, slot.value,  bookedInput.checked); modal.close()"
+      (click)="addReservation(nameInput.value, slot.value, bookedInput.checked);"
     >
       Add Reservation
     </button>

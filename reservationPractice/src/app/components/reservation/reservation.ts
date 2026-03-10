@@ -3,10 +3,11 @@ import { ReservationService } from '../../services/reservation-service';
 import { slot, ReservationInterface } from '../../interface/ReservationInterface';
 import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-reservation',
-  imports: [NgbModalModule, CommonModule],
+  imports: [NgbModalModule, CommonModule, FormsModule],
   templateUrl: './reservation.html',
   styleUrl: './reservation.css',
 })

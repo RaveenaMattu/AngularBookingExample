@@ -1,34 +1,38 @@
 import { Component } from '@angular/core';
 import { ReservationService } from '../../services/reservation-service';
-import { ReservationInterface } from '../../interface/ReservationInterface';
+import { slot, ReservationInterface } from '../../interface/ReservationInterface';
 import { NgbModal, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-reservation',
-  imports: [NgbModalModule],
+  imports: [NgbModalModule, CommonModule],
   templateUrl: './reservation.html',
   styleUrl: './reservation.css',
 })
 export class Reservation {
-
   reservations: ReservationInterface[] = [];
 
-  constructor(private reservationService: ReservationService, private modalService: NgbModal) {
+  constructor(
+    private reservationService: ReservationService,
+    private modalService: NgbModal,
+  ) {
     this.reservations = this.reservationService.getReservations();
   }
 
-  toggleReservation(i:number) {
+  toggleReservation(i: number) {
     this.reservationService.toggleBooking(i);
   }
 
-  openModal(content: any) {
-  this.modalService.open(content, {
-    centered: true
-  });
+  addReservation(rName: string, rTime: string, isBooked: boolean) {
+    this.reservationService.addReservation(rName, rTime, isBooked);
+  }
 
-}
+  openModal(content: any) {
+    this.modalService.open(content, {
+      centered: true,
+    });
+  }
 }
 /*
 

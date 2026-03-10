@@ -1,40 +1,41 @@
 import { Injectable } from '@angular/core';
-import { ReservationInterface } from '../interface/ReservationInterface';
+import { ReservationInterface, slot } from '../interface/ReservationInterface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ReservationService {
 
+
   private reservations : ReservationInterface[] = [
     {
       rName : 'Rattlesnake Point Conservation Area',
-      rTime : '9 am - 12 noon',
+      rTime : '9am - 12noon',
       isBooked : false
     },
     {
       rName : 'Rattlesnake Point Conservation Area',
-      rTime : '12 noon - 3 pm',
+      rTime : '12noon - 3pm',
       isBooked : true
     },
     {
       rName : 'Rattlesnake Point Conservation Area',
-      rTime : '3 pm - 6 pm',
+      rTime : '3pm - 6pm',
       isBooked : false
     },
      {
       rName : 'Heart Lake Conservation Area',
-      rTime : '9 am - 12 noon',
+      rTime : '9am - 12noon',
       isBooked : false
     },
     {
       rName : 'Heart Lake Conservation Area',
-      rTime : '12 noon - 3 pm',
+      rTime : '12noon - 3pm',
       isBooked : true
     },
     {
       rName : 'Heart Lake Conservation Area',
-      rTime : '3 pm - 6 pm',
+      rTime : '3pm - 6pm',
       isBooked : true
     }
   ];
@@ -47,8 +48,10 @@ export class ReservationService {
     this.reservations[i].isBooked = !this.reservations[i].isBooked;
   }
 
-  totalBookings(): number {
-    return this.reservations.filter(res => res.isBooked).length;
-  }
-  
+  addReservation(rName: string, sTime: string, isBooked: boolean) {
+    const rTime= sTime as slot;
+    if (rName != '') {
+    this.reservations.push({ rName, rTime, isBooked });
+    }
+  } 
  }

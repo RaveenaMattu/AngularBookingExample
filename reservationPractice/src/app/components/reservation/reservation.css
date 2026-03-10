@@ -3,7 +3,7 @@ h2 {
   margin-bottom: 70px;
 }
 #content {
-  padding: 170px 80px;
+  padding: 170px;
   border-radius: 18px;
   display: flex;
   flex-direction: column;
@@ -11,18 +11,22 @@ h2 {
 }
 .table {
   margin-bottom: 100px;
-  text-align: center;
 }
-.tRow {
-  margin-bottom: 5px;
+table.table td,
+table.table th {
+  border: none !important;
+  padding: 10px;
+}
+table.table th {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #000;
+}
+table.table tr {
+  margin-bottom: 15px;
 }
 
 #addBtn {
   width: 10rem;
   align-self: center;
-}
-/*MODAL DIMENSIONS*/
-.custom-modal .modal-dialog {
-  max-width: 800px;
 }
 

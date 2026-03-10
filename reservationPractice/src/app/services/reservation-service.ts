@@ -58,6 +58,13 @@ export class ReservationService {
     this.reservations.push({ id, rName, rTime, isBooked });
     }
   } 
+  // delete reservation 
+  deleteReservation(id: string) {
+    const index = this.reservations.findIndex(r => r.id === id);
+    if (index > -1) {
+      this.reservations.splice(index, 1); // removes 1 element at the found index
+    }
+  }
 
   // filter() selects reservations where isBooked === true
   // length gives the count.

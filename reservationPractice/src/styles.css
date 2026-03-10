@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+
+/*MODAL DIMENSIONS*/
+/* Add Reservation Modal */
+.add-res-modal .modal-dialog {
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Booked Reservations Modal */
+.booked-res-modal .modal-dialog {
+  max-width: 700px;
+  width: 100%;
+}
+
+/* Available Reservations Modal */
+.avail-res-modal .modal-dialog {
+  max-width: 700px;
+  width: 100%;
+}

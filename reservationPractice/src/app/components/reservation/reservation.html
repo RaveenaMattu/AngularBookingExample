@@ -5,27 +5,18 @@
   <ul class="list-group list-group-horizontal">
 
     <li class="list-group-item border-0">
-      <button
-        class="btn btn-link text-info p-0 text-decoration-none"
-        (click)="openModal(viewAvailRes)"
-        
-      >
+      <button class="btn btn-link text-info p-0 text-decoration-none"
+        (click)="openModal(viewAvailRes, 'avail-res-modal')">
         View Available Reservations
-        <span class="badge bg-success rounded-pill ms-3">
-          {{ availableReservations() }}
-        </span>
+        <span class="badge bg-success rounded-pill ms-3">{{ availableReservations() }}</span>
       </button>
     </li>
 
     <li class="list-group-item border-0">
-      <button
-        class="btn btn-link text-info p-0 text-decoration-none"
-        (click)="openModal(viewBookedRes)"
-      >
+      <button class="btn btn-link text-info p-0 text-decoration-none"
+        (click)="openModal(viewBookedRes, 'booked-res-modal')">
         View Booked Reservations
-        <span class="badge bg-danger rounded-pill ms-3">
-          {{ bookedReservations() }}
-        </span>
+        <span class="badge bg-danger rounded-pill ms-3">{{ bookedReservations() }}</span>
       </button>
     </li>
 
@@ -39,6 +30,7 @@
         <th scope="col">Res. Name</th>
         <th scope="col">Res. Time</th>
         <th scope="col">Status</th>
+        <th scope="col">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -57,12 +49,20 @@
               {{ reservation.isBooked ? 'Booked' : 'Available' }}
             </label>
           </td>
+          <td><button class="btn btn-link text-danger p-0" 
+                  (click)="deleteReservation(reservation.id)">
+            <i class="bi bi-trash"></i> <!-- Bootstrap Icons -->
+          </button><button class="btn btn-link text-success ps-4" 
+                  (click)="deleteReservation(reservation.id)">
+            <i class="bi bi-pencil"></i> <!-- Bootstrap Icons -->
+          </button></td>
         </tr>
       }
     </tbody>
   </table>
-  <button class="btn btn-dark" id="addBtn" (click)="openModal(addReservationModal)">
-    Add Reservation
+  <button class="btn btn-dark" id="addBtn"
+        (click)="openModal(addReservationModal, 'add-res-modal')">
+        Add Reservation
   </button>
 </div>
 
@@ -163,7 +163,7 @@
 
 <ng-template #viewAvailRes let-modal>
   <div class="modal-header justify-content-center w-100">
-    <h5 class="modal-title">BOOKED RESERVATIONS</h5>
+    <h5 class="modal-title">AVAILABLE RESERVATIONS</h5>
     <button class="btn-close" (click)="modal.dismiss()"></button>
   </div>
 

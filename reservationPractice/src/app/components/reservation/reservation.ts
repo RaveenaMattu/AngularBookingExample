@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class Reservation {
   reservations: ReservationInterface[] = [];
+  filteredRes: ReservationInterface[] = [];
 
   constructor(
     private reservationService: ReservationService,
@@ -21,10 +22,10 @@ export class Reservation {
     this.reservations = this.reservationService.getReservations();
   }
 
-  openModal(content: any) {
+   openModal(content: any, modalClass: string = '') {
     this.modalService.open(content, {
       centered: true,
-      windowClass: 'custom-modal'
+      windowClass: modalClass
     });
   }
 
@@ -36,6 +37,11 @@ export class Reservation {
   //add new reservation
   addReservation(id: string, rName: string, rTime: string, isBooked: boolean) {
     this.reservationService.addReservation(id, rName, rTime, isBooked);
+  }
+
+  //delete reservation
+  deleteReservation(id: string){
+    this.reservationService.deleteReservation(id);
   }
 
   //get booked reservations count
@@ -50,11 +56,11 @@ export class Reservation {
 
   //get booked reservations
   displayBookedRes(): ReservationInterface[] {
-    return this.reservations = this.reservationService.getBookedReservations();
+    return this.filteredRes = this.reservationService.getBookedReservations();
   }
   //get available reservations
   displayAvailRes(): ReservationInterface[] {
-    return this.reservations = this.reservationService.getAvailReservations();
+    return this.filteredRes = this.reservationService.getAvailReservations();
   }
 
 }

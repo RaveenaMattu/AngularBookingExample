@@ -39,6 +39,11 @@ export class Reservation {
     this.reservationService.addReservation(id, rName, rTime, isBooked);
   }
 
+  //update reservation
+  updateReservation(id: string, rName: string, rTime: string, isBooked: boolean) {
+    this.reservationService.updateReservation(id, rName, rTime, isBooked);
+  }
+
   //delete reservation
   deleteReservation(id: string){
     this.reservationService.deleteReservation(id);

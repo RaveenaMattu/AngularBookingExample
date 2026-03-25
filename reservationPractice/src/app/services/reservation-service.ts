@@ -52,6 +52,7 @@ export class ReservationService {
     this.reservations[i].isBooked = !this.reservations[i].isBooked;
   }
 
+  // add reservation
   addReservation(id: string, rName: string, sTime: string, isBooked: boolean) {
     const rTime= sTime as slot;
     if (rName != '') {
@@ -64,6 +65,20 @@ export class ReservationService {
     if (index > -1) {
       this.reservations.splice(index, 1); // removes 1 element at the found index
     }
+  }
+
+  // update reservation
+  updateReservation(id: string, rName: string, sTime: string, isBooked: boolean) {
+
+    const res = this.reservations.find(r=>r.id === id);
+
+    if(res) {
+      res.id = id;
+      res.rName = rName;
+      res.rTime = sTime as slot;
+      res.isBooked = isBooked;
+    }
+
   }
 
   // filter() selects reservations where isBooked === true
